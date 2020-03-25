@@ -1,0 +1,246 @@
+import random, sys
+
+#made by Andrew Agita Buntoro 119010503
+
+up = ''
+down = ''
+left = ''
+right = ''
+eight_list = [[1,2,3],[4,5,6],[7,8,0]]
+fifteen_list = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]
+matrix = []
+
+def board8():
+    #Make matrix board of random numbers
+    global matrix
+    list1 = [1,2,3,4,5,6,7,8,0]
+    random.shuffle(list1)
+    matrix = []
+    while liast1 !=[]:
+        matrix.append(list1[:3])
+        list1 = list1[3:]
+
+def zero8(draw_board8):
+    #function to find where the zero is
+    global matrix
+    empty_space = None
+    for x in range(len(matrix)):
+        for y in range(len(matrix)):
+            if matrix[x][y] == 0:
+                empty_space = (x,y)
+    return empty_space
+
+def draw_board8(board8):
+    #function to draw the board
+    print('\n\t+-------+-------+-------|')
+    for x in range(len(matrix)):
+        for y in range(len(matrix)):
+            if matrix[x][y] == 0:
+                print('\t|  XX' , end='')
+            else:
+                print('\t|  ' + '{:02d}' .format(matrix[x][y]), end=' ')
+        print('\n\t+-------+-------+-------|')
+
+def ask_direction8(board8):
+    #function to ask for the direction to move
+    global up, down, left, right
+    choice = input('\nplease type the direction: ( q ) to quit : (n) to new game: ')
+    if choice in [up, down, left, right]:
+        return choice
+    elif choice in ['q','Q']:
+        print('\nGoodbye! Thanks for playing ^^!  ')
+        print('made by: Andrew Agita Buntoro 119010503')
+        print()
+        sys.exit()
+    elif choice in ['n', 'N']:
+        print("new game starting...")
+        game_intro()
+    else:
+        print('illegal move , try again ')
+
+def game8():
+    #Run the game logic
+    global matrix
+    game_on = True
+    move = 0
+    board8()
+    while game_on:
+        i, j = zero8(matrix)
+        draw_board8(matrix)
+        choice = ask_direction8(board8)
+        if choice == up:
+            if (i+1) <= 2:
+                matrix[i][j], matrix[i+1][j] = matrix[i+1][j], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+        elif choice == down:
+            if (i-1) >= 0:
+                matrix[i][j], matrix[i-1][j] = matrix[i-1][j], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+        elif choice == left:
+            if (j+1) <= 2:
+                matrix[i][j], matrix[i][j+1] = matrix[i][j+1], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+        else:
+            if (j-1) >= 0:
+                matrix[i][j], matrix[i][j-1] = matrix[i][j-1], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+
+        if matrix == eight_list:
+            #win condition
+            print("you win on "+ str(move) + "moves!")
+            game_on = False
+            while True:
+                a = input("do you want to play again? (Y/N): ")
+                if a in ['y','Y']:
+                    game_intro()
+                elif a in ['n','N']:
+                    print("Goodbye, thanks for playing")
+                    break
+                else:
+                    print("Y or N only!")
+                    continue
+
+def board15():
+    #Make matrix board of random numbers
+    global matrix
+    list1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
+    random.shuffle(list1)
+    matrix = []
+    while list1 !=[]:
+        matrix.append(list1[:4])
+        list1 = list1[4:]
+
+def zero15(draw_board15):
+    #function to find where the zero is
+    global matrix
+    empty_space = None
+    for x in range(len(matrix)):
+        for y in range(len(matrix)):
+            if matrix[x][y] == 0:
+                empty_space = (x,y)
+    return empty_space
+
+def draw_board15(board15):
+    #function to draw the board
+    print('\n\t+-------+-------+-------+-------|')
+    for x in range(len(matrix)):
+        for y in range(len(matrix)):
+            if matrix[x][y] == 0:
+                print('\t|  XX' , end='')
+            else:
+                print('\t|  ' + '{:02d}' .format(matrix[x][y]), end=' ')
+        print('\n\t+-------+-------+-------+-------|')
+
+def ask_direction15(board15):
+    #function to ask for the number to move
+    global up, down, left, right
+    choice = input('\nplease type the direction: ( q ) to quit : (n) to new game: ')
+    if choice in [up, down, left, right]:
+        return choice
+    elif choice in ['q','Q']:
+        print('\nGoodbye! Thanks for playing ^^!  ')
+        print('made by: Andrew Agita Buntoro 119010503')
+        print()
+        sys.exit()
+    elif choice in ['n', 'N']:
+        print("new game starting...")
+        game_intro()
+    else:
+        print('illegal move , try again ')
+
+def game15():
+    #Run the game logic
+    global matrix
+    game_on = True
+    move = 0
+    board15()
+    while game_on:
+        i, j = zero15(matrix)
+        draw_board15(matrix)
+        choice = ask_direction15(board15)
+        if choice == up:
+            if (i+1) <= 3:
+                matrix[i][j], matrix[i+1][j] = matrix[i+1][j], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+        elif choice == down:
+            if (i-1) >= 0:
+                matrix[i][j], matrix[i-1][j] = matrix[i-1][j], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+        elif choice == left:
+            if (j+1) <= 3:
+                matrix[i][j], matrix[i][j+1] = matrix[i][j+1], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+        else:
+            if (j-1) >= 0:
+                matrix[i][j], matrix[i][j-1] = matrix[i][j-1], matrix[i][j]
+                move = move +1
+            print()
+            print('you have made ',move , 'moves so far ')
+        
+
+        if matrix == fifteen_list:
+            #win condition
+            print("you win on "+ str(move) + "moves!")
+            game_on = False
+            while True:
+                a = input("do you want to play again? (Y/N): ")
+                if a in ['y','Y']:
+                    game_intro()
+                elif a in ['n','N']:
+                    print("Goodbye, thanks for playing")
+                    print('made by: Andrew Agita Buntoro 119010503')
+                    break
+                else:
+                    print("Y or N only!")
+                    continue
+
+
+
+def game_intro():
+    global up, down, left, right
+    print()
+    print('made by: Andrew Agita Buntoro 119010503')
+    print()
+    print("Hi! Welcome to Andrew's slider game!  ")
+    print("first you need to enter ")
+    print("what key you want to use to move the blocks ")
+    print("then, choose either 8 or 15 puzzle you want to play!")
+    print("you need to order them from the left")
+    print("for 8 slider, first row needs to be 01,02,03 . second 04,05,06. third will be 07,08,XX")
+    print("im sure you know how it goes for 15 slider, so i won't explain it anymore ok? ")
+    print()
+    print("lets start! ")
+    print()  
+    up = input("Enter a key for up: ")
+    down = input("Enter a key for down: ")
+    left = input("Enter a key for left: ")
+    right = input("Enter a key for right: ")
+
+    while True:
+        n_o_t = (input("Do you want to play 8 or 15 puzzle? "))
+
+        if n_o_t == '8':
+            game8()
+        elif n_o_t == '15':
+            game15()
+        else:
+            print("Enter only 8 or 15!")
+            continue
+
+game_intro()
+
+
